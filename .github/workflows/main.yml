@@ -23,11 +23,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check out repository
       - uses: actions/checkout@v2
       - name: Build and deploy python to Heroku
-        env: 
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ 'raidassignmentbot' }}
-        run: |
-          heroku container:push web -a $APP_NAME
-          heroku container:release web -a $APP_NAME
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with: 
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
