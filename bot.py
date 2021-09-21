@@ -1,15 +1,28 @@
 import os
 from dotenv import load_dotenv
-
-# 1
+import web
 from discord.ext import commands
 
 print(f'Starting bot...')
 
+# herokuapp mandetory web app
+urls = (
+'/input', 'index'
+)
+class index:
+    def GET(self):
+        i = web.input(name=None)
+        return render.index(i.name)
+
+if __name__ == "__main__":
+    app = web.application(urls, globals())
+    app.run()
+
+render = web.template.render('templates/')
+
+# discord bot
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-
-# 2
 bot = commands.Bot(command_prefix='!')
 
 @bot.event
