@@ -1,22 +1,7 @@
 import os
 from dotenv import load_dotenv
-#import web
 from discord.ext import commands
-
-# herokuapp mandetory web app
-#urls = (
-#'/input', 'index'
-#)
-#class index:
-#    def GET(self):
-#        i = web.input(name=None)
-#        return render.index(i.name)
-
-#if __name__ == "__main__":
-#    app = web.application(urls, globals())
-#    app.run()
-#
-#render = web.template.render('templates/')
+from csv_parser import getparsed
 
 # discord bot
 print(f'Starting bot...')
@@ -29,9 +14,20 @@ async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
 @bot.command(name='ping')
-async def nine_nine(ctx):
-    response = "pong"
-    await ctx.send(response)
+async def ping(ctx):
     print(f'Pinged!')
+    response = 'pong'
+    await ctx.send(response)
+
+@bot.command(name='post')
+@commands.has_role('Raid Leader')
+async def post(ctx, raid):
+    print(f'Posting formatted tank and healer assignments for {raid}')
+    response = getparsed(raid)
+    if response == None:
+        response = 'I do not know that raid :('
+    await ctx.send(response)
+    print(f'Finished posting assignments for {raid}')
+    await ctx.message.delete()
 
 bot.run(TOKEN)
