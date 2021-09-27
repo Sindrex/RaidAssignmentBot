@@ -102,7 +102,10 @@ def parsecsv(csv_name):
                                 current_item = double_arr[tank_y][row_x]
                             tank_assigns.append(tank_str)
                             tank_y += 1
-                            current_row = double_arr[tank_y][tank_x]
+                            if tank_x < len(double_arr[y]) and tank_y < len(double_arr):
+                                current_row = double_arr[tank_y][tank_x]
+                            else:
+                                current_row = None
                         
                         # append boss
                         boss_assignments['tanks'] = tank_assigns
@@ -144,7 +147,10 @@ def parsecsv(csv_name):
                                     heal_str += current_item
                                 heal_assigns.append(heal_str)
                                 heal_y += 1
-                                current_row = double_arr[heal_y][heal_x]
+                                if heal_x < len(double_arr[y]) and heal_y < len(double_arr):
+                                    current_row = double_arr[heal_y][heal_x]
+                                else:
+                                    current_row = None
                         else:
                             phases = []
                             phase_y = heal_y
@@ -170,7 +176,10 @@ def parsecsv(csv_name):
                                     index += 1
                                 heal_assigns.append(heal_str)
                                 heal_y += 1
-                                current_healer = double_arr[heal_y][heal_x]
+                                if heal_x < len(double_arr[y]) and heal_y < len(double_arr):
+                                    current_healer = double_arr[heal_y][heal_x]
+                                else:
+                                    current_row = None
 
                         # append boss
                         boss_assignments['healers'] = heal_assigns
