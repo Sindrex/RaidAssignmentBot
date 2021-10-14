@@ -25,7 +25,7 @@ async def post(ctx, raid):
     print(f'Posting formatted tank and healer assignments for {raid}')
     response = getparsed(raid)
     if response == None:
-        response = 'I do not know that raid :('
+        response = 'Something went wrong :('
     await ctx.send(response)
     print(f'Finished posting assignments for {raid}')
     await ctx.message.delete()

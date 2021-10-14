@@ -5,12 +5,19 @@ import requests
 from dotenv import load_dotenv
 
 def getparsed(raid):
-    raid = raid.lower()
-    csv_name = 'res.txt'
-    downloadcsv(raid, csv_name)
-    arr = parsecsv(csv_name)
-    str = writearrtostr(raid, arr)
-    return str
+    try:
+        raid = raid.lower()
+        csv_name = 'res.txt'
+        res = downloadcsv(raid, csv_name)
+        if not res:
+            return 'Unable to find raid'
+        arr = parsecsv(csv_name)
+        str = writearrtostr(raid, arr)
+        return str
+    except Exception as e:
+        print('Error!')
+        print(e)
+        return 'Exception occurred'
 
 def writearrtostr(raid, arr):
     raid = raid.upper()
@@ -39,10 +46,11 @@ def downloadcsv(raid, name):
     elif raid == 'tk':
         url = os.getenv('CSV_URL_TK')
     else:
-        return None
+        return False
 
     result = requests.get(url, allow_redirects=True)
     open('res.txt', 'wb').write(result.content)
+    return True
 
 def parsecsv(csv_name):
     with open(csv_name) as csv_file:
@@ -88,13 +96,13 @@ def parsecsv(csv_name):
                         current_row = double_arr[tank_y][tank_x] # first tank
                         while current_row:
                             current_item = current_row
-                            tank_str = current_item + ": " # target row
+                            tank_str = current_item + " : " # target row
                             index = 0
                             row_x = tank_x + 1
                             current_item = double_arr[tank_y][row_x]
                             while current_item:
                                 if index > 0:
-                                    tank_str += ", "
+                                    tank_str += " & "
                                 index += 1
                                 tank_str += current_item
 
@@ -139,7 +147,7 @@ def parsecsv(csv_name):
                         if current_row != "Healer":
                             while current_row:
                                 current_item = current_row
-                                heal_str = current_item + ": " # healer row
+                                heal_str = current_item + " : " # healer row
                                 row_x = heal_x
                                 while current_item:
                                     row_x += 1
@@ -164,14 +172,14 @@ def parsecsv(csv_name):
                             heal_y += 1
                             current_healer = double_arr[heal_y][heal_x]
                             while current_healer:
-                                heal_str = current_healer + ": "
+                                heal_str = current_healer + " : "
                                 target_x = heal_x + 1
                                 index = 0
                                 for phase in phases:
                                     if index > 0:
                                         heal_str += " & "
                                     target = double_arr[heal_y][target_x]
-                                    heal_str += target + " during " + phase
+                                    heal_str += target + " in " + phase
                                     target_x += 1
                                     index += 1
                                 heal_assigns.append(heal_str)
