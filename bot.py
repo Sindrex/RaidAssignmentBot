@@ -26,7 +26,11 @@ async def post(ctx, raid):
     response = getparsed(raid)
     if response == None:
         response = 'Something went wrong :('
-    await ctx.send(response)
+    try:
+        await ctx.send(response)
+    except Exception as e:
+        response = 'Unable to send message. Too long?'
+        await ctx.send(response)
     print(f'Finished posting assignments for {raid}')
     await ctx.message.delete()
 
