@@ -141,6 +141,8 @@ def parsecsv(csv_name):
                     ass_y = boss_y + 1
                     ass_x = boss_x + 1
                     assigned = double_arr[ass_y][ass_x]
+                    print('assigned: ' + assigned)
+                    print('pos: y=' + ass_y + ', y=' + ass_x)
                     if assigned.lower() != '--unassigned':
                         print('Boss is assigned')
                         # find healers
