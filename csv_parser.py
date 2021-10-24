@@ -2,6 +2,7 @@ import os
 import csv
 import json
 import requests
+import traceback
 from dotenv import load_dotenv
 
 def getparsed(raid):
@@ -17,6 +18,7 @@ def getparsed(raid):
     except Exception as e:
         print('Error!')
         print(e)
+        print(traceback.format_exc())
         return 'Exception occurred'
 
 def writearrtostr(raid, arr):
