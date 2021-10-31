@@ -39,7 +39,7 @@ def writearrtostr(raid, arr):
             master_str += f'{healer}\n'
         master_str += '\r\n'
 
-    return_arr = []
+    return_arr = [master_str]
     amount = math.ceil(len(master_str) / 2000)
     print('Amount of messages to be sent: ' + str(amount))
     if(amount > 1):
