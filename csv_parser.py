@@ -20,7 +20,7 @@ def getparsed(raid):
         print('Error!')
         print(e)
         print(traceback.format_exc())
-        return 'Exception occurred'
+        return ['Exception occurred']
 
 def writearrtostr(raid, arr):
     raid = raid.upper()

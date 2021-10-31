@@ -26,6 +26,7 @@ async def post(ctx, raid):
     response = getparsed(raid)
     if response == None:
         response = 'Something went wrong :('
+        await ctx.send(response)
     try:
         for str in response:
             await ctx.send(str)
