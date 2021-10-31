@@ -41,6 +41,7 @@ def writearrtostr(raid, arr):
 
     return_arr = []
     amount = math.ceil(len(master_str) / 2000)
+    print('Amount of messages to be sent: ' + str(amount))
     if(amount > 1):
         return_arr = master_str.split('\r\n', amount)
     return return_arr
@@ -188,7 +189,10 @@ def parsecsv(csv_name):
                                 heal_str = current_healer + " : "
                                 target_x = heal_x + 1
                                 index = 0
+                                print('healer=' + current_healer)
                                 for phase in phases:
+                                    print('phase=' + phase)
+                                    print('pos: y=' + str(heal_y) + ', x=' + str(target_x))
                                     if index > 0:
                                         heal_str += " & "
                                     target = double_arr[heal_y][target_x]
