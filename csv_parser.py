@@ -44,6 +44,9 @@ def writearrtostr(raid, arr):
     print('Amount of messages to be sent: ' + str(amount))
     if(amount > 1):
         return_arr = master_str.split('\r\n', amount)
+    print('return arr items:')
+    for newstr in return_arr:
+        print(newstr)
     return return_arr
 
 def downloadcsv(raid, name):
