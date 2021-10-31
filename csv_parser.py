@@ -207,6 +207,7 @@ def parsecsv(csv_name):
                                 if heal_x < len(double_arr[y]) and heal_y < len(double_arr):
                                     current_healer = double_arr[heal_y][heal_x]
                                 else:
+                                    current_healer = None
                                     current_row = None
 
                         # append boss
