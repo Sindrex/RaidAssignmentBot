@@ -1,6 +1,7 @@
 import os
 import csv
 import json
+import math
 import requests
 import traceback
 from dotenv import load_dotenv
@@ -13,8 +14,8 @@ def getparsed(raid):
         if not res:
             return 'Unable to find raid'
         arr = parsecsv(csv_name)
-        str = writearrtostr(raid, arr)
-        return str
+        str_arr = writearrtostr(raid, arr)
+        return str_arr
     except Exception as e:
         print('Error!')
         print(e)
@@ -36,8 +37,13 @@ def writearrtostr(raid, arr):
         master_str += '\n'
         for healer in healers:
             master_str += f'{healer}\n'
-        master_str += '\n'
-    return master_str
+        master_str += '\r\n'
+
+    return_arr = []
+    amount = math.ceil(len(master_str) / 2000)
+    if(amount > 1):
+        return_arr = master_str.split('\r\n', amount)
+    return return_arr
 
 def downloadcsv(raid, name):
     load_dotenv()
@@ -133,7 +139,8 @@ def parsecsv(csv_name):
                     while boss_search != "Tanks":
                         boss_y -= 1
                         boss_search = double_arr[boss_y][boss_x]
-                    boss_search = double_arr[boss_y - 1][boss_x]
+                    boss_y -= 1
+                    boss_search = double_arr[boss_y][boss_x]
                     boss_assignments['name'] = boss_search
                     print('Found boss: ' + boss_search)
 
@@ -142,7 +149,7 @@ def parsecsv(csv_name):
                     ass_x = boss_x + 1
                     assigned = double_arr[ass_y][ass_x]
                     print('assigned: ' + assigned)
-                    print('pos: y=' + str(ass_y) + ', y=' + str(ass_x))
+                    print('pos: y=' + str(ass_y) + ', x=' + str(ass_x))
                     if assigned.lower() != '--unassigned':
                         print('Boss is assigned')
                         # find healers

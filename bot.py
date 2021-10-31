@@ -27,7 +27,8 @@ async def post(ctx, raid):
     if response == None:
         response = 'Something went wrong :('
     try:
-        await ctx.send(response)
+        for str in response:
+            await ctx.send(str)
     except Exception as e:
         response = 'Unable to send message. Too long?'
         await ctx.send(response)
