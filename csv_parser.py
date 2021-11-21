@@ -194,23 +194,23 @@ def parsecsv(csv_name):
                             phase_index = 0
                             heal_str = ''
                             for phase in phases:
-                                #print('>>>phase: ' + phase)
+                                print('>>>phase: ' + phase)
                                 heal_str += phase + "\n"
                                 heal_index = 0
                                 current_healer = double_arr[heal_y][heal_x]
                                 while current_healer:
-                                    #print('>>current_healer: ' + current_healer)
+                                    print('>>current_healer: ' + current_healer)
                                     heal_str += current_healer + " : "
                                     target_x = heal_x + 1 + phase_index
                                     target = double_arr[heal_y + heal_index][target_x]
-                                    #print('target: ' + target)
+                                    print('target: ' + target)
                                     heal_str += target + "\n"
                                     heal_index += 1
                                     if heal_x < len(double_arr[y]) and heal_y < len(double_arr):
                                         current_healer = double_arr[heal_y + heal_index][heal_x]
                                     else:
                                         current_healer = None
-                                    #print('>heal_str: \n' + heal_str)
+                                    print('>heal_str: \n' + heal_str)
                                 phase_index += 1
                                 #if phase_index < len(phases):
                                     #heal_str += "\n"
