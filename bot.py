@@ -34,6 +34,10 @@ async def post(ctx, raid):
         response = 'Unable to send message. Too long?'
         await ctx.send(response)
     print(f'Finished posting assignments for {raid}')
-    await ctx.message.delete()
+    try:
+        await ctx.message.delete()
+    except Exception as e:
+        response = 'Unable to delete command'
+        await ctx.send(response)
 
 bot.run(TOKEN)

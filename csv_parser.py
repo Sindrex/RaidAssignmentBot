@@ -46,6 +46,7 @@ def writearrtostr(raid, arr):
         return_arr = master_str.split('\r\n', amount - 1)
     print('return arr items:')
     for newstr in return_arr:
+        print('>>> Message')
         print(newstr)
     return return_arr
 
@@ -177,6 +178,7 @@ def parsecsv(csv_name):
                                 else:
                                     current_row = None
                         else:
+                            print('multiple phases healer')
                             phases = []
                             phase_y = heal_y
                             phase_x = heal_x + 1
@@ -188,27 +190,31 @@ def parsecsv(csv_name):
 
                             heal_y += 1
                             current_healer = double_arr[heal_y][heal_x]
-                            while current_healer:
-                                heal_str = current_healer + " : "
-                                target_x = heal_x + 1
-                                index = 0
-                                print('healer=' + current_healer)
-                                for phase in phases:
-                                    print('phase=' + phase)
-                                    print('pos: y=' + str(heal_y) + ', x=' + str(target_x))
-                                    if index > 0:
-                                        heal_str += " & "
-                                    target = double_arr[heal_y][target_x]
-                                    heal_str += target + " in " + phase
-                                    target_x += 1
-                                    index += 1
-                                heal_assigns.append(heal_str)
-                                heal_y += 1
-                                if heal_x < len(double_arr[y]) and heal_y < len(double_arr):
-                                    current_healer = double_arr[heal_y][heal_x]
-                                else:
-                                    current_healer = None
-                                    current_row = None
+
+                            phase_index = 0
+                            heal_str = ''
+                            for phase in phases:
+                                #print('>>>phase: ' + phase)
+                                heal_str += phase + "\n"
+                                heal_index = 0
+                                current_healer = double_arr[heal_y][heal_x]
+                                while current_healer:
+                                    #print('>>current_healer: ' + current_healer)
+                                    heal_str += current_healer + " : "
+                                    target_x = heal_x + 1 + phase_index
+                                    target = double_arr[heal_y + heal_index][target_x]
+                                    #print('target: ' + target)
+                                    heal_str += target + "\n"
+                                    heal_index += 1
+                                    if heal_x < len(double_arr[y]) and heal_y < len(double_arr):
+                                        current_healer = double_arr[heal_y + heal_index][heal_x]
+                                    else:
+                                        current_healer = None
+                                    #print('>heal_str: \n' + heal_str)
+                                phase_index += 1
+                                #if phase_index < len(phases):
+                                    #heal_str += "\n"
+                            heal_assigns.append(heal_str)
 
                         # append boss
                         boss_assignments['healers'] = heal_assigns
