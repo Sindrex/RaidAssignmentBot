@@ -210,8 +210,8 @@ def parsecsv(csv_name):
                                         current_healer = None
                                     print('>heal_str: \n' + heal_str)
                                 phase_index += 1
-                                #if phase_index < len(phases):
-                                    #heal_str += "\n"
+                                if phase_index < len(phases):
+                                    heal_str += "\n"
                             heal_assigns.append(heal_str)
 
                         # append boss
