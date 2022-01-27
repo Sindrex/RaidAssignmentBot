@@ -12,6 +12,7 @@ def getparsed(raid):
         csv_name = 'res.txt'
         res = downloadcsv(raid, csv_name)
         if not res:
+            print('Unable to find raid!')
             return 'Unable to find raid'
         arr = parsecsv(csv_name)
         str_arr = writearrtostr(raid, arr)
@@ -60,7 +61,7 @@ def downloadcsv(raid, name):
         url = os.getenv('CSV_URL_TK')
     elif raid == 'mh':
         url = os.getenv('CSV_URL_MH')
-    elif raid == 'by':
+    elif raid == 'bt':
         url = os.getenv('CSV_URL_BT')
     else:
         return False
