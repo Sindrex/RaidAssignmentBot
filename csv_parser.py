@@ -44,7 +44,7 @@ def writearrtostr(raid, arr):
     amount = math.ceil(len(master_str) / 2000)
     print('Amount of messages to be sent: ' + str(amount))
     if(amount > 1):
-        return_arr = master_str.split('\r\n', amount - 1)
+        return_arr = master_str.split('\r\n')
     print('return arr items:')
     for newstr in return_arr:
         print('>>> Message')
