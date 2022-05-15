@@ -49,6 +49,7 @@ def writearrtostr(raid, arr):
     for newstr in return_arr:
         print('>>> Message')
         print(newstr)
+        print('<<< Message')
     return return_arr
 
 def downloadcsv(raid, name):
