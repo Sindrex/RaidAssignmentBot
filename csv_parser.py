@@ -63,6 +63,8 @@ def downloadcsv(raid, name):
         url = os.getenv('CSV_URL_MH')
     elif raid == 'bt':
         url = os.getenv('CSV_URL_BT')
+    elif raid == 'swp':
+        url = os.getenv('CSV_URL_SWP')
     else:
         return False
 
